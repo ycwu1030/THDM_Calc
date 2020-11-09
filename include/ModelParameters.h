@@ -67,6 +67,9 @@
 #define Tan(i) tan(i)
 #define Cot(i) (1/tan(i))
 
+bool Check_Unitarity(double MHH, double MHA, double MHp, double M2, double beta, double alpha);
+
+bool Check_Stability(double MHH, double MHA, double MHp, double M2, double beta, double alpha);
 // class THDMParameter
 // {
 // public:

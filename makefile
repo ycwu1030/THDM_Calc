@@ -6,13 +6,20 @@ SRCDIR := src
 INCDIR := include
 OBJDIR := obj
 CXX = $(LT)/../bin/f++
-FFLAG = -I$(LT)/../include -I$(INCDIR)
+FFLAG = -I$(LT)/../include -I$(INCDIR) -std=c++11
 FLIBS = -L$(LT) -looptools
+
+muSTULIBPATH := ../HiggsSignalStrength_STU
+muSTUFLAGS := -I$(muSTULIBPATH)/
+muSTULIBS := -L$(muSTULIBPATH)/ -lHiggsSignalStrengthSTU -Wl,-rpath,$(muSTULIBPATH)
+
+FFLAG += $(muSTUFLAGS)
+FLIBS += $(muSTULIBS)
 
 SRC = $(wildcard $(SRCDIR)/*.cpp)
 OBJ = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 
-all: THDMHCoupCalc.x THDMHCoupCalc_NC.x THDMHCoupCalc_Check.x
+all: THDM_SCAN.x #THDMHCoupCalc.x THDMHCoupCalc_NC.x THDMHCoupCalc_Check.x
 
 %.x:%.cpp $(OBJ)
 	$(CXX) $(FFLAG) -o $@ $< $(OBJ) $(FLIBS)
